@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import filedialog
 from sympy import *
 from math import *
 
@@ -8,6 +9,8 @@ history = []
 symbolsdictionary={"Π":"pi","√":"sqrt","x": "*","²":"**2"}
 #variable intiation
 
+
+
 def calc():
     window = Tk()
     window.title("Calculator")
@@ -15,6 +18,15 @@ def calc():
     window.config(bg="#EAE0DA")
     window.resizable(False,False)
     #fixed window size color title
+    
+    def savescreen():
+        global history
+        file_path = filedialog.asksaveasfilename(defaultextension='.txt')
+        if file_path:
+            with open(file_path, 'w') as f:
+                for item in history:
+                    f.write("%s\n" % item)
+
     def calculate():
         global currentCalculation, history
         try:
@@ -48,17 +60,18 @@ def calc():
         currentCalculation+=element
         resultLabel.config(text=currentCalculation)
 
+    def save():
+        savescreen
+
     #functions declaration
     panel0=Frame(window,borderwidth=1,background="#A0C3D2")
     panel0.pack()
-    savebutton=Button(panel0,text="save",height=1,width=1)
+    savebutton=Button(panel0,text="save",height=1,width=1,command=savescreen)
     savebutton.pack(anchor="n")
-    #
+    #save button position and frame
     panel=Frame(window,borderwidth=2,background="#A0C3D2")
     panel.pack(anchor="center")
     #frame for history
-    
-    #
     historylabel=Label(panel,text="\n".join(history),font=("Times New Roman bold",13),width=45,height=8,bg="#EAE0DA")
     historylabel.pack()
     #history label
@@ -150,6 +163,9 @@ def calc():
     button54.grid(row=4,column=4,padx=1,pady=1)
 
     window.mainloop()
+
+    
+
 
 
 
