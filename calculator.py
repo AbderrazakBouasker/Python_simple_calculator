@@ -18,7 +18,7 @@ def calc():
     window.config(bg="#EAE0DA")
     window.resizable(False,False)
     #fixed window size color title
-    
+
     def savescreen():
         global history
         file_path = filedialog.asksaveasfilename(defaultextension='.txt')
@@ -59,9 +59,6 @@ def calc():
         global currentCalculation
         currentCalculation+=element
         resultLabel.config(text=currentCalculation)
-
-    def save():
-        savescreen
 
     #functions declaration
     panel0=Frame(window,borderwidth=1,background="#A0C3D2")
